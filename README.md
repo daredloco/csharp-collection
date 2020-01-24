@@ -53,10 +53,82 @@ SetLanguage(LANGUAGE_OBJECT);
 ```
 
 ## RoWa.Functions.cs
-Todo
+
+### Usage:
+#### Check if User is Admin
+```cs
+IsUserAdmin(); //Returns true if user is admin
+```
+
+#### Convert a string to a hash
+```cs
+string message = "make a hash out of me!";
+Hashtype ht = HashType.SHA256;
+
+GetHash(message,ht);
+```
+
+#### Create a string with a currency prefab out of a double value
+```cs
+double value = 50.25;
+string prefix = "£";
+
+DoubleToCurrency(value,prefix);
+```
+#### Encrypts a string to bytes
+```cs
+//Not for production!
+```
+
+#### Decrypts a string from bytes
+```cs
+//Not for production!
+```
+
+#### Resizes the control to the size of the text in it
+```cs
+ResizeControl(CONTROL);
+```
 
 ## RoWa.Debug.cs
-Todo
+
+### Usage:
+#### Set log directory
+```cs
+logdir = "/directory/from/log";
+```
+
+#### Logging
+```cs
+string message = "this is a log message";
+//Standart Log
+Log(message);
+
+//Exception Log
+ExceptionLog(new Exception(message));
+
+//Warning Log with popup
+WarningLog(message, true);
+
+//Warning Log without popup
+WarningLog(message, false);
+
+//Empty Log
+EmptyLog();
+```
 
 ## Rowa.Game.GameTime.cs
-Todo
+
+### Usage:
+```cs
+RoWa.Game.GameTime gt1 = new RoWa.Game.GameTime(); //Creates a default gametime with 1 second per tick
+RoWa.Game.GameTime gt2 = new RoWa.Game.GameTime(500,false); //Creates a default gametime with 1 second per tick, an interval of 500ms and it won't autostart
+RoWa.Game.GameTime gt3 = new RoWa.Game.GameTime(0,0,0,1,1,1,500); //Creates a default gametime with 1 second per tick and it starts with 0 hours, minutes seconds and 1 day, month and year and an interval of 500ms
+RoWa.Game.GameTime gt4 = new RoWa.Game.GameTime(0,0,0,1,1,1,0,5,0,0,0,0,500); //Creates a  gametime with 5 minutes per tick and it starts with 0 hours, minutes seconds and 1 day, month and year and an interval of 500ms
+
+gt2.Start(); //Starts the gametime if it's not started already
+gt2.Stop(); //Stops the gametime if it's not stopped already
+gt2.ToString("d.m.yyyy h:m:s"); //Gets the time with the format 'd.m.yyyy h:m:s
+
+gt2.Tick(5); //Manually ticks 5 seconds
+```
