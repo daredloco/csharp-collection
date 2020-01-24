@@ -8,6 +8,7 @@ namespace RoWa
 		{
 		public static Dictionary<string, Language> Languages { get; private set; }
 		public static Language UserLanguage { get; private set; }
+		public static Language DefaultLanguage { get; private set; }
 
 		public static void Init(string dir, string defaultlanguage = "en", string extension = ".txt")
 		{
@@ -24,9 +25,38 @@ namespace RoWa
 			}
 
 			if (!Languages.ContainsKey(defaultlanguage))
-				throw new Exception("Couldn't find default language '" + defaultlanguage + "'!");
+				throw new LoCaException("Couldn't find default language '" + defaultlanguage + "'!");
 
 			UserLanguage = Languages[defaultlanguage];
+			DefaultLanguage = Languages[defaultlanguage];
+		}
+
+		public static void SetDefault(string key)
+		{
+			if (!Languages.ContainsKey(key))
+			{
+				throw new LoCaException("Couldn't set default language to '" + key + "', because language wasn't found!");
+			}
+			SetDefault(Languages[key]);
+		}
+
+		public static void SetDefault(Language lang)
+		{
+			DefaultLanguage = lang;
+		}
+
+		public static void SetLanguage(string key)
+		{
+			if (!Languages.ContainsKey(key))
+			{
+				throw new LoCaException("Couldn't set user language to '" + key + "', because language wasn't found!");
+			}
+			SetLanguage(Languages[key]);
+		}
+
+		public static void SetLanguage(Language lang)
+		{
+			UserLanguage = lang;
 		}
 
 		public static void Trans(string key)
