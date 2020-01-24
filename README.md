@@ -39,7 +39,7 @@ RoWa.LoCa.Translate("word");
 
 #### Set languages
 ##### Default:
-```
+```cs
 SetDefault(KEY);
 SetDefault("en");
 SetDefault(LANGUAGE_OBJECT);
