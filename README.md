@@ -52,14 +52,11 @@ SetLanguage("en");
 SetLanguage(LANGUAGE_OBJECT);
 ```
 
-### Roadmap
-- [x] Loading the languages
-- [x] Translate the keys
-- [x] Set the default language
-- [x] Set the user language
-
 ## RoWa.Functions.cs
 Todo
 
 ## RoWa.Debug.cs
+Todo
+
+## Rowa.Game.GameTime.cs
 Todo
