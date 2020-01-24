@@ -1,9 +1,9 @@
 # C Sharp Collection
 
-A collection of scripts for Unity
+A collection of scripts for C#
 
 
-## LoCa.cs
+## RoWa.LoCa.cs
 
 ### Usage:
 
@@ -55,3 +55,9 @@ UserLanguage = Languages["en"];
 - [x] Translate the keys
 - [ ] Set the default language (Can only be set on Init() at the moment)
 - [ ] Set the user language (Will be set same as the default language)
+
+## RoWa.Functions.cs
+Todo
+
+## RoWa.Debug.cs
+Todo
