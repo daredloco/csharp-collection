@@ -64,7 +64,7 @@ namespace RoWa
 		/// <param name="d">the double value</param>
 		/// <param name="currency">the currency prefix</param>
 		/// <returns>A string containing the currency value</returns>
-		internal static string DoubleToCurrency(double d, string currency = "R$")
+		internal static string DoubleToCurrency(double d, string currency = "$")
 		{
 			bool isMinus = false;
 			if(d < 0) { isMinus = true; }
@@ -107,6 +107,13 @@ namespace RoWa
 			return str;
 		}
 
+		/// <summary>
+		/// Do not use this function at the moment!
+		/// </summary>
+		/// <param name="plainText"></param>
+		/// <param name="Key"></param>
+		/// <param name="IV"></param>
+		/// <returns></returns>
 		internal static byte[] EncryptStringToBytes_Aes(string plainText, byte[] Key, byte[] IV)
 		{
 			if (plainText == null || plainText.Length <= 0)
@@ -140,6 +147,13 @@ namespace RoWa
 
 		}
 
+		/// <summary>
+		/// Do not use this function at the moment!
+		/// </summary>
+		/// <param name="cipherText"></param>
+		/// <param name="Key"></param>
+		/// <param name="IV"></param>
+		/// <returns></returns>
 		internal static string DecryptStringFromBytes_Aes(byte[] cipherText, byte[] Key, byte[] IV)
 		{
 			if (cipherText == null || cipherText.Length <= 0)
@@ -175,6 +189,10 @@ namespace RoWa
 
 		}
 
+		/// <summary>
+		/// Resizes the control
+		/// </summary>
+		/// <param name="control">The control to resize</param>
 		internal static void ResizeControl(object control)
 		{
 			if(control.GetType() == typeof(ComboBox))
