@@ -40,21 +40,23 @@ RoWa.LoCa.Translate("word");
 #### Set languages
 ##### Default:
 ```
-Must be set at the RoWa.LoCa.Init() function!
+SetDefault(KEY);
+SetDefault("en");
+SetDefault(LANGUAGE_OBJECT);
 ```
 
 ##### User:
 ```cs
-UserLanguage = Languages[KEY];
-
-UserLanguage = Languages["en"];
+SetLanguage(KEY);
+SetLanguage("en");
+SetLanguage(LANGUAGE_OBJECT);
 ```
 
 ### Roadmap
 - [x] Loading the languages
 - [x] Translate the keys
-- [ ] Set the default language (Can only be set on Init() at the moment)
-- [ ] Set the user language (Will be set same as the default language)
+- [x] Set the default language
+- [x] Set the user language
 
 ## RoWa.Functions.cs
 Todo
