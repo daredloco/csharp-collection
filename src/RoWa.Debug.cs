@@ -10,7 +10,7 @@ namespace RoWa
 {
 	internal static class Debug
 	{
-		//internal static bool Enabled = true;
+		internal static bool Enabled = true;
 		static string logdir = Application.StartupPath + @"\Data\Logs";
 
 		static string dstring()
@@ -36,9 +36,13 @@ namespace RoWa
 			return s;
 		}
 
+		/// <summary>
+		/// Writes an info message to the log
+		/// </summary>
+		/// <param name="msg">The message to be written to the log</param>
 		internal static void Log(string msg)
 		{
-			if (!Settings.DebugMode)
+			if (!Enabled)
 				return;
 
 			Directory.CreateDirectory(logdir);
@@ -50,9 +54,13 @@ namespace RoWa
 			}
 		}
 
+		/// <summary>
+		/// Writes an exception to the log and throws the exception afterwards
+		/// </summary>
+		/// <param name="ex">The exception</param>
 		internal static void ExceptionLog(Exception ex)
 		{
-			if (!Settings.DebugMode)
+			if (!Enabled)
 				return;
 
 			Directory.CreateDirectory(logdir);
@@ -65,9 +73,14 @@ namespace RoWa
 			throw ex;
 		}
 
+		/// <summary>
+		/// Writes a warning to the log and shows a popup if showPopup is true
+		/// </summary>
+		/// <param name="msg">The message</param>
+		/// <param name="showPopup">If true, it will show a popup</param>
 		internal static void WarningLog(string msg, bool showPopup = false)
 		{
-			if (!Settings.DebugMode)
+			if (!Enabled)
 				return;
 
 			Directory.CreateDirectory(logdir);
@@ -84,9 +97,12 @@ namespace RoWa
 			}
 		}
 
+		/// <summary>
+		/// Sends an empty line to the log
+		/// </summary>
 		internal static void EmptyLog()
 		{
-			if (!Settings.DebugMode)
+			if (!Enabled)
 				return;
 
 			Directory.CreateDirectory(logdir);

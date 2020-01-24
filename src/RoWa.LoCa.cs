@@ -10,6 +10,12 @@ namespace RoWa
 		public static Language UserLanguage { get; private set; }
 		public static Language DefaultLanguage { get; private set; }
 
+		/// <summary>
+		/// Initializing
+		/// </summary>
+		/// <param name="dir">The directory of the localization files</param>
+		/// <param name="defaultlanguage">The key of the default language</param>
+		/// <param name="extension">The extension of the localization files</param>
 		public static void Init(string dir, string defaultlanguage = "en", string extension = ".txt")
 		{
 			if (!Directory.Exists(dir))
@@ -31,6 +37,10 @@ namespace RoWa
 			DefaultLanguage = Languages[defaultlanguage];
 		}
 
+		/// <summary>
+		/// Sets a default language
+		/// </summary>
+		/// <param name="key">The key of the language</param>
 		public static void SetDefault(string key)
 		{
 			if (!Languages.ContainsKey(key))
@@ -40,11 +50,19 @@ namespace RoWa
 			SetDefault(Languages[key]);
 		}
 
+		/// <summary>
+		/// Sets a default language
+		/// </summary>
+		/// <param name="lang">The language object</param>
 		public static void SetDefault(Language lang)
 		{
 			DefaultLanguage = lang;
 		}
 
+		/// <summary>
+		/// Sets the UserLanguage
+		/// </summary>
+		/// <param name="key">The key of the language</param>
 		public static void SetLanguage(string key)
 		{
 			if (!Languages.ContainsKey(key))
@@ -54,11 +72,19 @@ namespace RoWa
 			SetLanguage(Languages[key]);
 		}
 
+		/// <summary>
+		/// Sets the UserLanguage
+		/// </summary>
+		/// <param name="lang">The language object</param>
 		public static void SetLanguage(Language lang)
 		{
 			UserLanguage = lang;
 		}
 
+		/// <summary>
+		/// Translates the key
+		/// </summary>
+		/// <param name="key">The key to translate</param>
 		public static void Trans(string key)
 		{
 			if(UserLanguage == null)
@@ -68,6 +94,10 @@ namespace RoWa
 			UserLanguage.Trans(key);
 		}
 
+		/// <summary>
+		/// Translates the key
+		/// </summary>
+		/// <param name="key">The key to translate</param>
 		public static void Translate(string key)
 		{
 			Trans(key);

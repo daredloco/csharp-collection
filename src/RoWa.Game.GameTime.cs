@@ -27,6 +27,11 @@ namespace RoWa
 
 			System.Timers.Timer timer = new System.Timers.Timer();
 
+			/// <summary>
+			/// Create a new GameTime
+			/// </summary>
+			/// <param name="inter">The interval in miliseconds</param>
+			/// <param name="autostart">If true, it will start automatic</param>
 			public GameTime(int inter = 1000, bool autostart = true)
 			{
 				gtHours = 0;
@@ -50,6 +55,17 @@ namespace RoWa
 					Start();
 			}
 
+			/// <summary>
+			/// Create a new GameTime
+			/// </summary>
+			/// <param name="hours">The gtHours</param>
+			/// <param name="minutes">The gtMinutes</param>
+			/// <param name="seconds">The gtSeconds</param>
+			/// <param name="days">The gtDays</param>
+			/// <param name="months">The gtMonths</param>
+			/// <param name="years">The gtYears</param>
+			/// <param name="inter">The interval in miliseconds</param>
+			/// <param name="autostart">If true, it will start automatic</param>
 			public GameTime(int hours, int minutes, int seconds, int days, int months, int years, int inter, bool autostart = true)
 			{
 				gtHours = hours;
@@ -72,6 +88,23 @@ namespace RoWa
 					Start();
 			}
 
+			/// <summary>
+			/// 
+			/// </summary>
+			/// <param name="hours">The gtHours</param>
+			/// <param name="minutes">The gtMinutes</param>
+			/// <param name="seconds">The gtSeconds</param>
+			/// <param name="days">The gtDays</param>
+			/// <param name="months">The gtMonths</param>
+			/// <param name="years">The gtYears</param>
+			/// <param name="inter">The interval in miliseconds</param>
+			/// <param name="addseconds">The seconds to add per tick</param>
+			/// <param name="addminutes">The minutes to add per tick</param>
+			/// <param name="addhours">The hours to add per tick</param>
+			/// <param name="adddays">The days to add per tick</param>
+			/// <param name="addmonths">The months to add per tick</param>
+			/// <param name="addyears">The years to add per tick</param>
+			/// <param name="autostart">If true, it will start automatic</param>
 			public GameTime(int hours, int minutes, int seconds, int days, int months, int years, int inter, int addseconds, int addminutes = 0, int addhours = 0, int adddays = 0, int addmonths = 0, int addyears = 0, bool autostart = true)
 			{
 				gtHours = hours;
@@ -95,22 +128,42 @@ namespace RoWa
 					Start();
 			}
 
+			/// <summary>
+			/// Starts the GameTime.timer
+			/// </summary>
 			public void Start()
 			{
 				timer.Elapsed += TimerTicks;
 				timer.Start();
 			}
 
+			/// <summary>
+			/// Stops the GameTime.timer
+			/// </summary>
 			public void Stop()
 			{
 				timer.Stop();
 			}
 
+			/// <summary>
+			/// Is thrown when the GameTime.timer ticks
+			/// </summary>
+			/// <param name="sender"></param>
+			/// <param name="args"></param>
 			void TimerTicks(object sender, EventArgs args)
 			{
 				Tick(addSeconds, addMinutes, addHours, addDays, addMonths, addYears);
 			}
 
+			/// <summary>
+			/// Manual GameTime.Tick
+			/// </summary>
+			/// <param name="seconds">Seconds to add</param>
+			/// <param name="minutes">Minutes to add</param>
+			/// <param name="hours">Hours to add</param>
+			/// <param name="days">Days to add</param>
+			/// <param name="months">Months to add</param>
+			/// <param name="years">Years to add</param>
 			public void Tick(int seconds, int minutes = 0, int hours = 0, int days = 0, int months = 0, int years = 0)
 			{
 				gtSeconds += seconds;
@@ -154,6 +207,11 @@ namespace RoWa
 				OnTick?.Invoke(this, args);
 			}
 
+			/// <summary>
+			/// Returns the GameTime in a specific format
+			/// </summary>
+			/// <param name="format">The format of the GameTime</param>
+			/// <returns></returns>
 			public string ToString(string format = "h:m:s d.m.yyyy")
 			{
 				DateTime dt = new DateTime(gtYears, gtMonths, gtDays, gtHours, gtMinutes, gtSeconds);
