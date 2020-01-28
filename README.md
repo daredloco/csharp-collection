@@ -68,7 +68,7 @@ Hashtype ht = HashType.SHA256;
 GetHash(message,ht);
 ```
 
-#### Create a string with a currency prefab out of a double value
+#### Create a string with a currency prefix out of a double value
 ```cs
 double value = 50.25;
 string prefix = "£";
