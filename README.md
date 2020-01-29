@@ -160,12 +160,12 @@ gt2.Tick(5); //Manually ticks 5 seconds
 
 ### Usage:
 ```cs
-RoWa.Game.SaveDirectory = "Savefiles" //Sets the directory of the savefiles
-RoWa.Game.SaveExtension = ".save" //Sets the extension of the savefiles
+RoWa.Game.SaveHandler.SaveDirectory = "Savefiles" //Sets the directory of the savefiles
+RoWa.Game.SaveHandler.SaveExtension = ".save" //Sets the extension of the savefiles
 
-RoWa.Game.SaveFile sf1 = new RoWa.Game.SaveFile("game1"); //Loads or creates a new savefile
-RoWa.Game.SaveFile sf2 = new RoWa.Game.SaveFile("game1","savename"); //Loads or creates a new savefile with a custom name 'savename'
-RoWa.Game.SaveFile sf3 = new RoWa.Game.SaveFile("game1","",false); //Creates a new savefile but doesn't load it
+RoWa.Game.SaveHandler.SaveFile sf1 = new RoWa.Game.SaveFile("game1"); //Loads or creates a new savefile
+RoWa.Game.SaveHandler.SaveFile sf2 = new RoWa.Game.SaveFile("game1","savename"); //Loads or creates a new savefile with a custom name 'savename'
+RoWa.Game.SaveHandler.SaveFile sf3 = new RoWa.Game.SaveFile("game1","",false); //Creates a new savefile but doesn't load it
 
 sf3.Load(); //Manually loads the savefile
 
