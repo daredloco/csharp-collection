@@ -2,6 +2,22 @@
 
 A collection of scripts for C#
 
+## Index
+* [RoWa.LoCa.cs](#rowalocacs)
+
+* [RoWa.Functions.cs](#rowafunctionscs)
+
+* [RoWa.Debug.cs](#rowadebugcs)
+
+* [RoWa.Settings.cs](#rowasettingscs)
+
+* [RoWa.Game.cs](#rowagamecs)
+
+* [RoWa.Game.GameTime.cs](#rowagamegametimecs)
+
+* [RoWa.Game.SaveHandler.cs](#rowagamesavehandlercs)
+
+
 
 ## RoWa.LoCa.cs
 
@@ -117,7 +133,7 @@ WarningLog(message, false);
 EmptyLog();
 ```
 
-## RoWa.Settings
+## RoWa.Settings.cs
 
 ### Usage:
 ```cs
@@ -128,7 +144,7 @@ RoWa.Settings.RemoveValue("language"); //Removes the value from the settings and
 RoWa.Settings.GetValue("language"); //Returns a dynamic variable with the value
 ```
 
-## RoWa.Game
+## RoWa.Game.cs
 
 ### Usage:
 ```cs
