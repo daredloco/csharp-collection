@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Security.Principal;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
