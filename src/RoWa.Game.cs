@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
 namespace RoWa.Game
 {
@@ -127,6 +124,50 @@ namespace RoWa.Game
 			float dy = Math.Abs(v1.Y - v2.Y);
 			float dz = Math.Abs(v1.Z - v2.Z);
 			return dx + dy + dz;
+		}
+	}
+
+	public class GameObject
+	{
+		public Vector3 Transform { get; set; }
+		public Vector3 Position { get; set; }
+		public string Name { get; set; }
+	}
+
+	public class GameObject2D
+	{
+		public Vector2 Transform { get; set; }
+		public Vector2 Position { get; set; }
+		public string Name { get; set; }
+		public Texture Sprite { get; set; }
+	}
+
+	public struct Texture
+	{
+		Bitmap bitmap;
+		string sourcefile;
+
+		public static Texture FromFile(string file)
+		{
+			if (!System.IO.File.Exists(file))
+				throw new System.IO.FileNotFoundException("Texture file '" + file + "' not found!");
+
+			Texture tex = new Texture();
+			tex.sourcefile = file;
+			try
+			{
+				tex.bitmap = new Bitmap(file);
+				return tex;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}
+		}
+
+		public Bitmap GetBitmap()
+		{
+			return bitmap;
 		}
 	}
 }
