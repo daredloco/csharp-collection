@@ -18,7 +18,7 @@ A collection of scripts for C#
 * [RoWa.Game.SaveHandler.cs](#rowagamesavehandlercs)
 
 ## Requirements
-C# 4.0
+C# 4.0+
 
 ## RoWa.LoCa.cs
 
