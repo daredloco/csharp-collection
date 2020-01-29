@@ -117,22 +117,6 @@ WarningLog(message, false);
 EmptyLog();
 ```
 
-## Rowa.Game.GameTime.cs
-
-### Usage:
-```cs
-RoWa.Game.GameTime gt1 = new RoWa.Game.GameTime(); //Creates a default gametime with 1 second per tick
-RoWa.Game.GameTime gt2 = new RoWa.Game.GameTime(500,false); //Creates a default gametime with 1 second per tick, an interval of 500ms and it won't autostart
-RoWa.Game.GameTime gt3 = new RoWa.Game.GameTime(0,0,0,1,1,1,500); //Creates a default gametime with 1 second per tick and it starts with 0 hours, minutes seconds and 1 day, month and year and an interval of 500ms
-RoWa.Game.GameTime gt4 = new RoWa.Game.GameTime(0,0,0,1,1,1,0,5,0,0,0,0,500); //Creates a  gametime with 5 minutes per tick and it starts with 0 hours, minutes seconds and 1 day, month and year and an interval of 500ms
-
-gt2.Start(); //Starts the gametime if it's not started already
-gt2.Stop(); //Stops the gametime if it's not stopped already
-gt2.ToString("d.m.yyyy h:m:s"); //Gets the time with the format 'd.m.yyyy h:m:s
-
-gt2.Tick(5); //Manually ticks 5 seconds
-```
-
 ## RoWa.Game
 
 ### Usage:
@@ -154,4 +138,43 @@ RoWa.game.Vector3.Distance(v31,v32); //Returns a float with the distance between
 RoWa.Game.Vector3.Parse("5/5/5"); //Creates a Vector2 value with x, y and z values from a string
 RoWa.Game.Vector3 vout;
 RoWa.Game.Vector3.TryParse("5/5/5", out vout); //Tries to create a Vector3 value with x, y and z values from a string to vout and returns true if it could parse it or false if not
+```
+
+## Rowa.Game.GameTime.cs
+
+### Usage:
+```cs
+RoWa.Game.GameTime gt1 = new RoWa.Game.GameTime(); //Creates a default gametime with 1 second per tick
+RoWa.Game.GameTime gt2 = new RoWa.Game.GameTime(500,false); //Creates a default gametime with 1 second per tick, an interval of 500ms and it won't autostart
+RoWa.Game.GameTime gt3 = new RoWa.Game.GameTime(0,0,0,1,1,1,500); //Creates a default gametime with 1 second per tick and it starts with 0 hours, minutes seconds and 1 day, month and year and an interval of 500ms
+RoWa.Game.GameTime gt4 = new RoWa.Game.GameTime(0,0,0,1,1,1,0,5,0,0,0,0,500); //Creates a  gametime with 5 minutes per tick and it starts with 0 hours, minutes seconds and 1 day, month and year and an interval of 500ms
+
+gt2.Start(); //Starts the gametime if it's not started already
+gt2.Stop(); //Stops the gametime if it's not stopped already
+gt2.ToString("d.m.yyyy h:m:s"); //Gets the time with the format 'd.m.yyyy h:m:s
+
+gt2.Tick(5); //Manually ticks 5 seconds
+```
+
+## RoWa.Game.SaveHandler.cs
+
+### Usage:
+```cs
+RoWa.Game.SaveDirectory = "Savefiles" //Sets the directory of the savefiles
+RoWa.Game.SaveExtension = ".save" //Sets the extension of the savefiles
+
+RoWa.Game.SaveFile sf1 = new RoWa.Game.SaveFile("game1"); //Loads or creates a new savefile
+RoWa.Game.SaveFile sf2 = new RoWa.Game.SaveFile("game1","savename"); //Loads or creates a new savefile with a custom name 'savename'
+RoWa.Game.SaveFile sf3 = new RoWa.Game.SaveFile("game1","",false); //Creates a new savefile but doesn't load it
+
+sf3.Load(); //Manually loads the savefile
+
+sf1.Add("player_points",1000); //Adds a value to the Savefile data
+sf1.Get("player_points"); //Returns a value from the Savefile data
+sf1.Remove("player_points"); //Removes a value from the Savefile data
+
+RoWa.Game.Vector2 v = new RoWa.Game.Vector2(5,5);
+sf2.Add("player_position",v); //Adds a special object to the Savefile data. (Vector2 and Vector3 are supported)
+
+sf2.Save(); //Saves the data to the savefile
 ```
