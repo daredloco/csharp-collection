@@ -117,6 +117,17 @@ WarningLog(message, false);
 EmptyLog();
 ```
 
+## RoWa.Settings
+
+### Usage:
+```cs
+RoWa.Settings.Location = "settings.cfg" //Sets the location of the file (default is "settings.cfg"
+RoWa.Settings.Load(); //Loads the settings from the file
+RoWa.Settings.SetValue("language","en"); //Adds/Updates the value to the settings and saves the file
+RoWa.Settings.RemoveValue("language"); //Removes the value from the settings and saves the file
+RoWa.Settings.GetValue("language"); //Returns a dynamic variable with the value
+```
+
 ## RoWa.Game
 
 ### Usage:
