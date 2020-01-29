@@ -3,19 +3,19 @@
 A collection of scripts for C#
 
 ## Index
-* [RoWa.LoCa.cs](#rowalocacs)
+* [RoWa.LoCa.cs](#rowalocacs) (Simple localization system)
 
-* [RoWa.Functions.cs](#rowafunctionscs)
+* [RoWa.Functions.cs](#rowafunctionscs) (Various useful functions)
 
-* [RoWa.Debug.cs](#rowadebugcs)
+* [RoWa.Debug.cs](#rowadebugcs) (Debugging system)
 
-* [RoWa.Settings.cs](#rowasettingscs)
+* [RoWa.Settings.cs](#rowasettingscs) (Settings system)
 
-* [RoWa.Game.cs](#rowagamecs)
+* [RoWa.Game.cs](#rowagamecs) (Useful game functions)
 
-* [RoWa.Game.GameTime.cs](#rowagamegametimecs)
+* [RoWa.Game.GameTime.cs](#rowagamegametimecs) (Gametime system)
 
-* [RoWa.Game.SaveHandler.cs](#rowagamesavehandlercs)
+* [RoWa.Game.SaveHandler.cs](#rowagamesavehandlercs) (Savegame system)
 
 ## Requirements
 C# 4.0+
