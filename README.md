@@ -132,3 +132,26 @@ gt2.ToString("d.m.yyyy h:m:s"); //Gets the time with the format 'd.m.yyyy h:m:s
 
 gt2.Tick(5); //Manually ticks 5 seconds
 ```
+
+## RoWa.Game
+
+### Usage:
+```cs
+//Vector2
+RoWa.Game.Vector2 v21 = RoWa.Game.Vector2(); //Creates an empty Vector2 value
+RoWa.Game.Vector2 v22 = RoWa.Game.Vector2(5,5); //Creates a Vector2 value with x and y values
+RoWa.Game.Vector2.Compare(v21,v22); //Returns a Vector2 value with the difference between v21 and v22
+RoWa.game.Vector2.Distance(v21,v22); //Returns a float with the distance between v21 and v22
+RoWa.Game.Vector2.Parse("5/5"); //Creates a Vector2 value with x and y values from a string
+RoWa.Game.Vector2 vout;
+RoWa.Game.Vector2.TryParse("5/5", out vout); //Tries to create a Vector2 value with x and y values from a string to vout and returns true if it could parse it or false if not
+
+//Vector3
+RoWa.Game.Vector3 v31 = RoWa.Game.Vector3(); //Creates an empty Vector3 value
+RoWa.Game.Vector3 v32 = RoWa.Game.Vector3(5,5,5); //Creates a Vector3 value with x, y and z values
+RoWa.Game.Vector3.Compare(v31,v32); //Returns a Vector3 value with the difference between v31 and v32
+RoWa.game.Vector3.Distance(v31,v32); //Returns a float with the distance between v31 and v32
+RoWa.Game.Vector3.Parse("5/5/5"); //Creates a Vector2 value with x, y and z values from a string
+RoWa.Game.Vector3 vout;
+RoWa.Game.Vector3.TryParse("5/5/5", out vout); //Tries to create a Vector3 value with x, y and z values from a string to vout and returns true if it could parse it or false if not
+```
