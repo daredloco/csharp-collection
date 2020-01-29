@@ -41,6 +41,7 @@ namespace RoWa
 		public static void RemoveValue(string key)
 		{
 			file.Remove(key);
+			file.Save();
 		}
 
 		/// <summary>
