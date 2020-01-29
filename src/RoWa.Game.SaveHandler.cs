@@ -15,6 +15,12 @@ namespace RoWa
 			public string Location { get; set; }
 			Dictionary<string, dynamic> Data { get; set; }
 
+			/// <summary>
+			/// Create a new Savefile
+			/// </summary>
+			/// <param name="filename">The file on the local disk</param>
+			/// <param name="name">The name of the Savefile, if not set it will be the same as filename</param>
+			/// <param name="autoload">Load the content on creation</param>
 			public SaveFile(string filename, string name = "", bool autoload = true)
 			{
 				if(name == "") { name = filename; }
@@ -24,6 +30,12 @@ namespace RoWa
 				if (autoload) { Load(); }
 			}
 
+			/// <summary>
+			/// Add new Data to the Savefile
+			/// </summary>
+			/// <param name="key">The key of the data</param>
+			/// <param name="value">The value of the data</param>
+			/// <param name="overwrite">If the data exists it will be overwritten</param>
 			public void Add(string key, dynamic value, bool overwrite = true)
 			{
 				if (!overwrite)
@@ -60,6 +72,11 @@ namespace RoWa
 				}
 			}
 
+			/// <summary>
+			/// Gets the Data from the Savefile
+			/// </summary>
+			/// <param name="key">The key of the Data</param>
+			/// <returns>The data as dynamic</returns>
 			public dynamic Get(dynamic key)
 			{
 				if (Data.ContainsKey(key))
@@ -82,6 +99,10 @@ namespace RoWa
 				throw new Exception("Data '" + key + "' does not exists inside Save '" + Name + "'!");
 			}
 
+			/// <summary>
+			/// Removes the Data from the Savefile
+			/// </summary>
+			/// <param name="key">The key of the Data</param>
 			public void Remove(dynamic key)
 			{
 				if (!Data.ContainsKey(key))
@@ -91,6 +112,9 @@ namespace RoWa
 				Data.Remove(key);
 			}
 
+			/// <summary>
+			/// Saves the Savefile to the local disk
+			/// </summary>
 			public void Save()
 			{
 				using (StreamWriter sw = new StreamWriter(Location, false))
@@ -102,6 +126,9 @@ namespace RoWa
 				}
 			}
 
+			/// <summary>
+			/// Loads the Savefile from the local disk (Clears the Data!)
+			/// </summary>
 			public void Load()
 			{
 				if (!File.Exists(Location))

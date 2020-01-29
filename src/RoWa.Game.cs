@@ -61,7 +61,6 @@ namespace RoWa.Game
 			return dx + dy;
 		}
 	}
-
 	public struct Vector3
 	{
 		public float X;
@@ -126,22 +125,6 @@ namespace RoWa.Game
 			return dx + dy + dz;
 		}
 	}
-
-	public class GameObject
-	{
-		public Vector3 Transform { get; set; }
-		public Vector3 Position { get; set; }
-		public string Name { get; set; }
-	}
-
-	public class GameObject2D
-	{
-		public Vector2 Transform { get; set; }
-		public Vector2 Position { get; set; }
-		public string Name { get; set; }
-		public Texture Sprite { get; set; }
-	}
-
 	public struct Texture
 	{
 		Bitmap bitmap;
@@ -159,7 +142,7 @@ namespace RoWa.Game
 				tex.bitmap = new Bitmap(file);
 				return tex;
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				throw ex;
 			}
@@ -170,4 +153,19 @@ namespace RoWa.Game
 			return bitmap;
 		}
 	}
-}
+
+	public class GameObject
+	{
+		public Vector3 Transform { get; set; }
+		public Vector3 Position { get; set; }
+		public string Name { get; set; }
+	}
+	public class GameObject2D
+	{
+		public Vector2 Transform { get; set; }
+		public Vector2 Position { get; set; }
+		public string Name { get; set; }
+		public Texture Sprite { get; set; }
+	}
+
+	}
