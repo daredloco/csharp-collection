@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Java.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +25,7 @@ namespace RoWa
 			/// <param name="asset">The asset folder of the localization files</param>
 			/// <param name="defaultlanguage">The key of the default language</param>
 			/// <param name="extension">The extension of the localization files</param>
-			public static void Init(string asset, string defaultlanguage = "en", Activity a)
+			public static void Init(string asset, Activity a, string defaultlanguage = "en")
 			{
 				activity = a;
 				foreach (string fname in activity.Assets.List(asset))
@@ -117,35 +118,38 @@ namespace RoWa
 
 				public Language(string fname)
 				{
-					Stream fs = activity.Assets.Open(fname);
-					
-					int lcount = 0;
-					
-					foreach (string fline in File.ReadAllLines())
-					{
-						lcount++;
-						if (fline.StartsWith("language_key="))
-							key = fline.Replace("language_key=", "");
-						else if (fline.StartsWith("language_english"))
-							english = fline.Replace("language_english", "");
-						else if (fline.StartsWith("language_local"))
-							local = fline.Replace("language_local", "");
-						else if (fline.StartsWith("language_author"))
-							author = fline.Replace("language_author", "");
-						else if (fline.StartsWith("language_version"))
-							version = fline.Replace("language_version", "");
-						else if (fline.StartsWith("#") || fline == "" || !fline.Contains("="))
-						{
-							//Do nothing...
-						}
-						else
-						{
-							string k = fline.Split('=')[0];
-							string v = fline.Replace(k + "=", "");
-							if (dict.ContainsKey(k))
-								throw new LoCaException("Error on line " + lcount + ": Key '" + k + "' does already exist inside file '" + fname + "'!");
+					BufferedReader reader = null;
 
-							dict.Add(k, v);
+					using(reader = new BufferedReader(new InputStreamReader(activity.Assets.Open(fname))))
+					{
+						string fline;
+						int lcount = 0;
+						while((fline = reader.ReadLine()) != null)
+						{
+							lcount++;
+							if (fline.StartsWith("language_key="))
+								key = fline.Replace("language_key=", "");
+							else if (fline.StartsWith("language_english"))
+								english = fline.Replace("language_english", "");
+							else if (fline.StartsWith("language_local"))
+								local = fline.Replace("language_local", "");
+							else if (fline.StartsWith("language_author"))
+								author = fline.Replace("language_author", "");
+							else if (fline.StartsWith("language_version"))
+								version = fline.Replace("language_version", "");
+							else if (fline.StartsWith("#") || fline == "" || !fline.Contains("="))
+							{
+								//Do nothing...
+							}
+							else
+							{
+								string k = fline.Split('=')[0];
+								string v = fline.Replace(k + "=", "");
+								if (dict.ContainsKey(k))
+									throw new LoCaException("Error on line " + lcount + ": Key '" + k + "' does already exist inside file '" + fname + "'!");
+
+								dict.Add(k, v);
+							}
 						}
 					}
 					if (key == null)
