@@ -5,6 +5,8 @@ A collection of scripts for C#
 ## Index
 * [RoWa.LoCa.cs](#rowalocacs) (Simple localization system)
 
+* [RoWa.Xamarin.LoCa.cs](#rowaxamarinlocacs) (Simple localization system for Xamarin)
+
 * [RoWa.Functions.cs](#rowafunctionscs) (Various useful functions)
 
 * [RoWa.Debug.cs](#rowadebugcs) (Debugging system)
@@ -67,6 +69,19 @@ SetDefault(LANGUAGE_OBJECT);
 SetLanguage(KEY);
 SetLanguage("en");
 SetLanguage(LANGUAGE_OBJECT);
+```
+## RoWa.Xamarin.LoCa.cs
+
+### Requirements
+Xamarin
+
+### Usage:
+The Xamarin version of RoWa.LoCa.cs is identical to the main version of the script. The only difference is the way the data is saved and the way it is loaded.
+
+#### Save and Load the Data
+The data has the same structure as in the main version, but it is saved as Android Asset. To load it simply write the assets directory to the RoWa.Xamarin.LoCa.Init() function like this:
+```cs
+RoWa.Xamarin.LoCa.Init("localization"); //Loads all files from the directory 'Project/Assets/localization'
 ```
 
 ## RoWa.Functions.cs
