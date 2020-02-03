@@ -85,22 +85,22 @@ namespace RoWa
 		/// Translates the key
 		/// </summary>
 		/// <param name="key">The key to translate</param>
-		public static void Trans(string key)
+		public static string Trans(string key)
 		{
 			if(UserLanguage == null)
 			{
 				throw new LoCaException("No UserLanguage set!");
 			}
-			UserLanguage.Trans(key);
+			return UserLanguage.Trans(key);
 		}
 
 		/// <summary>
 		/// Translates the key
 		/// </summary>
 		/// <param name="key">The key to translate</param>
-		public static void Translate(string key)
+		public static string Translate(string key)
 		{
-			Trans(key);
+			return Trans(key);
 		}
 
 		public class Language
@@ -108,8 +108,6 @@ namespace RoWa
 			public string key { get; private set; }
 			public string english { get; private set; }
 			public string local { get; private set; }
-			public string author { get; private set; }
-			public string version { get; private set; }
 			public Dictionary<string,string> dict { get; private set; }
 
 			public Language(string fname)
@@ -121,18 +119,14 @@ namespace RoWa
 				foreach(string fline in File.ReadAllLines(fname))
 				{
 					lcount++;
-					if (fline.StartsWith("language_key="))
+					if (fline.StartsWith("language_key="))					
 						key = fline.Replace("language_key=", "");
 					else if (fline.StartsWith("language_english"))
 						english = fline.Replace("language_english", "");
 					else if (fline.StartsWith("language_local"))
 						local = fline.Replace("language_local", "");
-					else if (fline.StartsWith("language_author"))
-						author = fline.Replace("language_author", "");
-					else if (fline.StartsWith("language_version"))
-						version = fline.Replace("language_version", "");
-					else if (fline.StartsWith("#") || fline == "" || !fline.Contains("="))
-					{
+					else if(fline.StartsWith("#") || fline == "" || !fline.Contains("="))
+					{                       
 						//Do nothing...
 					}
 					else

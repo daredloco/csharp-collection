@@ -28,9 +28,10 @@ namespace RoWa
 			public static void Init(string asset, Activity a, string defaultlanguage = "en")
 			{
 				activity = a;
+				Languages = new Dictionary<string, Language>();
 				foreach (string fname in activity.Assets.List(asset))
 				{
-						Language lang = new Language(fname);
+						Language lang = new Language(asset + "/" + fname);
 						Languages.Add(lang.key, lang);
 				}
 
@@ -89,22 +90,22 @@ namespace RoWa
 			/// Translates the key
 			/// </summary>
 			/// <param name="key">The key to translate</param>
-			public static void Trans(string key)
+			public static string Trans(string key)
 			{
 				if (UserLanguage == null)
 				{
 					throw new LoCaException("No UserLanguage set!");
 				}
-				UserLanguage.Trans(key);
+				return UserLanguage.Trans(key);
 			}
 
 			/// <summary>
 			/// Translates the key
 			/// </summary>
 			/// <param name="key">The key to translate</param>
-			public static void Translate(string key)
+			public static string Translate(string key)
 			{
-				Trans(key);
+				return Trans(key);
 			}
 
 			public class Language
@@ -119,7 +120,7 @@ namespace RoWa
 				public Language(string fname)
 				{
 					BufferedReader reader = null;
-
+					dict = new Dictionary<string, string>();
 					using(reader = new BufferedReader(new InputStreamReader(activity.Assets.Open(fname))))
 					{
 						string fline;
