@@ -3,6 +3,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.IO;
+using System.Globalization;
 
 namespace RoWa
 {
@@ -100,6 +101,20 @@ namespace RoWa
 					str = currency + before + "." + after;
 				}
 				return str;
+			}
+
+			/// <summary>
+			/// Returns the Week of a specific DateTime and Culture
+			/// </summary>
+			/// <param name="dt">The datetime</param>
+			/// <param name="ci">The culture</param>
+			/// <returns>An integer value with the week</returns>
+			public static int GetWeekOfDate(DateTime dt, CultureInfo ci)
+			{
+				Calendar calendar = ci.Calendar;
+				CalendarWeekRule calendarweekrule = ci.DateTimeFormat.CalendarWeekRule;
+				DayOfWeek firstdayofweek = ci.DateTimeFormat.FirstDayOfWeek;
+				return calendar.GetWeekOfYear(dt, calendarweekrule, firstdayofweek);
 			}
 
 			/// <summary>
