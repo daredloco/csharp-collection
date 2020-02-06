@@ -9,6 +9,8 @@ A collection of scripts for C#
 
 * [RoWa.Functions.cs](#rowafunctionscs) (Various useful functions)
 
+* [RoWa.Xamarin.Functions.cs](#rowaxamarinfunctionscs) (Various useful functions for Xamarin)
+
 * [RoWa.Debug.cs](#rowadebugcs) (Debugging system)
 
 * [RoWa.Settings.cs](#rowasettingscs) (Settings system)
@@ -121,6 +123,9 @@ DoubleToCurrency(value,prefix);
 ```cs
 ResizeControl(CONTROL);
 ```
+
+## RoWa.Xamarin.Functions.cs
+Same as RoWa.Functions.cs but without some Desktop only functions
 
 ## RoWa.Debug.cs
 
