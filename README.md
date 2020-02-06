@@ -122,6 +122,9 @@ DoubleToCurrency(value,prefix);
 ResizeControl(CONTROL);
 ```
 
+## RoWa.Xamarin.Functions.cs
+Same as RoWa.Functions.cs but without some Desktop only functions
+
 ## RoWa.Debug.cs
 
 ### Usage:
