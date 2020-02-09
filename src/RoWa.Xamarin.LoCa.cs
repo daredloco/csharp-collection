@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Util;
 using Java.IO;
 using System;
 using System.Collections.Generic;
@@ -84,6 +85,14 @@ namespace RoWa
 			public static void SetLanguage(Language lang)
 			{
 				UserLanguage = lang;
+			}
+
+			/// <summary>
+			/// Sets the Language to the Devices language or sets it to english if the devices language couldn't be found
+			/// </summary>
+			public static void SetUserLanguage()
+			{
+				Log.Debug("LoCa", "Function 'SetUserLanguage()' not implemented...");
 			}
 
 			/// <summary>

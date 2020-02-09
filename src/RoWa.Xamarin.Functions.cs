@@ -60,8 +60,15 @@ namespace RoWa
 			/// <param name="d">the double value</param>
 			/// <param name="currency">the currency prefix</param>
 			/// <returns>A string containing the currency value</returns>
-			internal static string DoubleToCurrency(double d, string currency = "$")
+			internal static string DoubleToCurrency(double d, string currency = "$", bool prefixBefore = true)
 			{
+				string prefix = "";
+				string suffix = "";
+				if (prefixBefore)
+					prefix = currency;
+				else
+					suffix = currency;
+
 				bool isMinus = false;
 				if(d < 0) { isMinus = true; }
 				d = Math.Abs(d);
@@ -78,10 +85,10 @@ namespace RoWa
 				{
 					if (isMinus)
 					{
-						str = "-" + currency + str + ".00";
+						str = "-" + prefix + str + ".00" + suffix;
 					}
 					else {
-						str = currency + str + ".00";
+						str = prefix + str + ".00" + suffix;
 					}
 					return str;
 				}
@@ -94,11 +101,11 @@ namespace RoWa
 
 				if (isMinus)
 				{
-					str = "-" + currency + before + "." + after;
+					str = "-" + prefix + before + "." + after + suffix;
 				}
 				else
 				{
-					str = currency + before + "." + after;
+					str = prefix + before + "." + after + suffix;
 				}
 				return str;
 			}
