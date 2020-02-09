@@ -67,7 +67,7 @@ namespace RoWa
 				if (prefixBefore)
 					prefix = currency;
 				else
-					suffix = currency;
+					suffix = " " + currency;
 
 				bool isMinus = false;
 				if(d < 0) { isMinus = true; }
