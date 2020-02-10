@@ -1,4 +1,6 @@
 ﻿using Android.App;
+using Android.Content.Res;
+using Android.Support.V4.OS;
 using Android.Util;
 using Java.IO;
 using System;
@@ -88,11 +90,22 @@ namespace RoWa
 			}
 
 			/// <summary>
-			/// Sets the Language to the Devices language or sets it to english if the devices language couldn't be found
+			/// Sets the language to the device language (en-US) or the language prefix (en) or to nothing if not found
 			/// </summary>
 			public static void SetUserLanguage()
 			{
-				Log.Debug("LoCa", "Function 'SetUserLanguage()' not implemented...");
+				LocaleListCompat lst = ConfigurationCompat.GetLocales(Resources.System.Configuration);
+				if (Languages.ContainsKey(lst.ToLanguageTags())){
+					SetLanguage(Languages[lst.ToLanguageTags()]);
+					Log.Debug("LoCa", "Set language to " + lst.ToLanguageTags());
+					return;
+				}
+				if (Languages.ContainsKey(lst.ToLanguageTags().Split('-')[0]))
+				{
+					SetLanguage(Languages[lst.ToLanguageTags().Split('-')[0]]);
+					Log.Debug("LoCa", "Set language to " + lst.ToLanguageTags().Split('-')[0]);
+					return;
+				}
 			}
 
 			/// <summary>
