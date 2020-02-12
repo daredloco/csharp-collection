@@ -62,6 +62,7 @@ namespace RoWa
 			/// <returns>A string containing the currency value</returns>
 			internal static string DoubleToCurrency(double d, string currency = "$", bool prefixBefore = true)
 			{
+				d = Math.Round(d, 2);
 				string prefix = "";
 				string suffix = "";
 				if (prefixBefore)
