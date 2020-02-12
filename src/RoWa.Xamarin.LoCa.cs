@@ -122,6 +122,38 @@ namespace RoWa
 			}
 
 			/// <summary>
+			/// Translates the key and replaces the values
+			/// </summary>
+			/// <param name="key">The key to translate</param>
+			/// <param name="values">A list of KeyValuePairs where the 'key' will be replaced with the 'value'</param>
+			/// <returns>The translated string</returns>
+			public static string Trans(string key, params KeyValuePair<string,string>[] values)
+			{
+				string transstr = Trans(key);
+				foreach(KeyValuePair<string,string> value in values)
+				{
+					transstr = transstr.Replace(value.Key, value.Value);
+				}
+				return transstr;
+			}
+
+			/// <summary>
+			/// Translates the key and replaces the values
+			/// </summary>
+			/// <param name="key">The key to translate</param>
+			/// <param name="values">A Dictionary where the 'key' will be replaced with the 'value'</param>
+			/// <returns>The translated string</returns>
+			public static string Trans(string key, Dictionary<string,string> values)
+			{
+				string transstr = Trans(key);
+				foreach(KeyValuePair<string,string> value in values)
+				{
+					transstr = transstr.Replace(value.Key, value.Value);
+				}
+				return transstr;
+			}
+
+			/// <summary>
 			/// Translates the key
 			/// </summary>
 			/// <param name="key">The key to translate</param>
