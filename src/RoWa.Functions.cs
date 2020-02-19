@@ -103,6 +103,61 @@ namespace RoWa
 		}
 
 		/// <summary>
+		/// Returns the Week of a specific DateTime and Culture
+		/// </summary>
+		/// <param name="dt">The datetime</param>
+		/// <param name="ci">The culture</param>
+		/// <returns>An integer value with the week</returns>
+		public static int GetWeekOfDate(DateTime dt, CultureInfo ci)
+		{
+			Calendar calendar = ci.Calendar;
+			CalendarWeekRule calendarweekrule = ci.DateTimeFormat.CalendarWeekRule;
+			DayOfWeek firstdayofweek = ci.DateTimeFormat.FirstDayOfWeek;
+			return calendar.GetWeekOfYear(dt, calendarweekrule, firstdayofweek);
+		}
+
+		/// <summary>
+		/// Returns the days of the week as DateTime objects from the actual week and the current culture
+		/// </summary>
+		/// <returns>An array of DateTime objects representing the days of the week</returns>
+		public static DateTime[] GetDaysOfWeek()
+		{
+			return GetDaysOfWeek(DateTime.Now);
+		}
+
+		/// <summary>
+		/// Returns the days of the week as DateTime objects from a DateTime object and the current culture
+		/// </summary>
+		/// <param name="dt">The datetime object</param>
+		/// <returns>An array of DateTime objects representing the days of the week</returns>
+		public static DateTime[] GetDaysOfWeek(DateTime dt)
+		{
+			return GetDaysOfWeek(dt, CultureInfo.CurrentCulture);
+		}
+
+		/// <summary>
+		/// Returns the days of the week as DateTime objects from a DateTime object and CultureInfo
+		/// </summary>
+		/// <param name="dt">The datetime object</param>
+		/// <param name="ci">The cultureinfo</param>
+		/// <returns>An array of DateTime objects representing the days of the week</returns>
+		public static DateTime[] GetDaysOfWeek(DateTime dt, CultureInfo ci)
+		{
+			Calendar calendar = ci.Calendar;
+			DayOfWeek firstdayofweek = ci.DateTimeFormat.FirstDayOfWeek;
+			DayOfWeek today = calendar.GetDayOfWeek(dt);
+			List<DateTime> days = new List<DateTime>();
+			int firstday = (int)firstdayofweek;
+			int daynow = (int)today;
+			for (int i = 0; i <= 6; i++)
+			{
+				DateTime d = dt.AddDays((firstday - daynow) + i);
+				days.Add(d.Date);
+			}
+			return days.ToArray();
+		}
+
+		/// <summary>
 		/// Do not use this function at the moment!
 		/// </summary>
 		/// <param name="plainText"></param>
