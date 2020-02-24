@@ -109,6 +109,8 @@ namespace RoWa
 			public string Key { get; private set; }
 			public string English { get; private set; }
 			public string Local { get; private set; }
+			public string Author { get; private set; }
+			public string Version { get; private set; }
 			public Dictionary<string,string> Dict { get; private set; }
 
 			public Language(string fname)
@@ -120,14 +122,18 @@ namespace RoWa
 				foreach(string fline in File.ReadAllLines(fname))
 				{
 					lcount++;
-					if (fline.StartsWith("language_key="))					
+					if (fline.StartsWith("language_key="))
 						Key = fline.Replace("language_key=", "");
-					else if (fline.StartsWith("language_english"))
-						English = fline.Replace("language_english", "");
-					else if (fline.StartsWith("language_local"))
-						Local = fline.Replace("language_local", "");
-					else if(fline.StartsWith("#") || fline == "" || !fline.Contains("="))
-					{                       
+					else if (fline.StartsWith("language_english="))
+						English = fline.Replace("language_english=", "");
+					else if (fline.StartsWith("language_local="))
+						Local = fline.Replace("language_local=", "");
+					else if (fline.StartsWith("language_author="))
+						Author = fline.Replace("language_author=", "");
+					else if (fline.StartsWith("language_version="))
+						Version = fline.Replace("language_version=", "");
+					else if (fline.StartsWith("#") || fline == "" || !fline.Contains("="))
+					{
 						//Do nothing...
 					}
 					else
