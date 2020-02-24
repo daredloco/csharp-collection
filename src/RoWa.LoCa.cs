@@ -21,12 +21,13 @@ namespace RoWa
 			if (!Directory.Exists(dir))
 				throw new LoCaException("Directory '" + dir + "' does not exist!");
 
+			Languages = new Dictionary<string, Language>();
 			foreach(string fname in Directory.GetFiles(dir))
 			{
 				if(new FileInfo(fname).Extension == extension)
 				{
 					Language lang = new Language(fname);
-					Languages.Add(lang.key, lang);
+					Languages.Add(lang.Key, lang);
 				}
 			}
 
@@ -105,26 +106,26 @@ namespace RoWa
 
 		public class Language
 		{
-			public string key { get; private set; }
-			public string english { get; private set; }
-			public string local { get; private set; }
-			public Dictionary<string,string> dict { get; private set; }
+			public string Key { get; private set; }
+			public string English { get; private set; }
+			public string Local { get; private set; }
+			public Dictionary<string,string> Dict { get; private set; }
 
 			public Language(string fname)
 			{
 				if (!File.Exists(fname))
 					throw new LoCaException("Languagefile '" + fname + "' couldn't be found!");
-
+				Dict = new Dictionary<string, string>();
 				int lcount = 0;
 				foreach(string fline in File.ReadAllLines(fname))
 				{
 					lcount++;
 					if (fline.StartsWith("language_key="))					
-						key = fline.Replace("language_key=", "");
+						Key = fline.Replace("language_key=", "");
 					else if (fline.StartsWith("language_english"))
-						english = fline.Replace("language_english", "");
+						English = fline.Replace("language_english", "");
 					else if (fline.StartsWith("language_local"))
-						local = fline.Replace("language_local", "");
+						Local = fline.Replace("language_local", "");
 					else if(fline.StartsWith("#") || fline == "" || !fline.Contains("="))
 					{                       
 						//Do nothing...
@@ -133,24 +134,24 @@ namespace RoWa
 					{
 						string k = fline.Split('=')[0];
 						string v = fline.Replace(k + "=", "");
-						if (dict.ContainsKey(k))
+						if (Dict.ContainsKey(k))
 							throw new LoCaException("Error on line " + lcount + ": Key '" + k + "' does already exist inside file '" + fname + "'!");
 
-						dict.Add(k, v);
+						Dict.Add(k, v);
 					}
 				}
-				if(key == null)
+				if(Key == null)
 					throw new LoCaException("Error inside file '" + fname + "': Key 'language_key' isn't set!");
-				if(english == null)
+				if(English == null)
 					throw new LoCaException("Error inside file '" + fname + "': Key 'language_english' isn't set!");
-				if (local == null)
+				if (Local == null)
 					throw new LoCaException("Error inside file '" + fname + "': Key 'language_local' isn't set!");
 			}
 
 			public string Trans(string key)
 			{
-				if (dict.ContainsKey(key))
-					return dict[key];
+				if (Dict.ContainsKey(key))
+					return Dict[key];
 
 				return "{" + key + "}";
 			}
