@@ -55,15 +55,23 @@ namespace RoWa
 		}
 
 		/// <summary>
-		/// Convers a double value to a currency value
+		/// Convers a decimal value to a currency value
 		/// </summary>
-		/// <param name="d">the double value</param>
+		/// <param name="d">the decimal value</param>
 		/// <param name="currency">the currency prefix</param>
 		/// <returns>A string containing the currency value</returns>
-		internal static string DoubleToCurrency(double d, string currency = "$")
+		internal static string NumberToCurrency(decimal d, string currency = "$", bool prefixBefore = true)
 		{
+			d = Math.Round(d, 2);
+			string prefix = "";
+			string suffix = "";
+			if (prefixBefore)
+				prefix = currency;
+			else
+				suffix = " " + currency;
+
 			bool isMinus = false;
-			if(d < 0) { isMinus = true; }
+			if (d < 0) { isMinus = true; }
 			d = Math.Abs(d);
 			string str = d + "";
 			if (str.Contains(","))
@@ -78,10 +86,11 @@ namespace RoWa
 			{
 				if (isMinus)
 				{
-					str = "-" + currency + str + ".00";
+					str = "-" + prefix + str + ".00" + suffix;
 				}
-				else {
-					str = currency + str + ".00";
+				else
+				{
+					str = prefix + str + ".00" + suffix;
 				}
 				return str;
 			}
@@ -94,13 +103,156 @@ namespace RoWa
 
 			if (isMinus)
 			{
-				str = "-" + currency + before + "." + after;
+				str = "-" + prefix + before + "." + after + suffix;
 			}
 			else
 			{
-				str = currency + before + "." + after;
+				str = prefix + before + "." + after + suffix;
 			}
 			return str;
+		}
+
+		/// <summary>
+		/// Convers a double value to a currency value
+		/// </summary>
+		/// <param name="d">the double value</param>
+		/// <param name="currency">the currency prefix</param>
+		/// <returns>A string containing the currency value</returns>
+		internal static string NumberToCurrency(double d, string currency = "$", bool prefixBefore = true)
+		{
+			d = Math.Round(d, 2);
+			string prefix = "";
+			string suffix = "";
+			if (prefixBefore)
+				prefix = currency;
+			else
+				suffix = " " + currency;
+
+			bool isMinus = false;
+			if (d < 0) { isMinus = true; }
+			d = Math.Abs(d);
+			string str = d + "";
+			if (str.Contains(","))
+			{
+				str = str.Replace(",", ".");
+			}
+			else if (str.Contains("."))
+			{
+				//INGORE BECAUSE IT HAS ALREADY THE CORRECT FORMAT
+			}
+			else
+			{
+				if (isMinus)
+				{
+					str = "-" + prefix + str + ".00" + suffix;
+				}
+				else
+				{
+					str = prefix + str + ".00" + suffix;
+				}
+				return str;
+			}
+			string before = str.Split('.')[0];
+			string after = str.Split('.')[1];
+			if (after.Length < 2)
+			{
+				after += "0";
+			}
+
+			if (isMinus)
+			{
+				str = "-" + prefix + before + "." + after + suffix;
+			}
+			else
+			{
+				str = prefix + before + "." + after + suffix;
+			}
+			return str;
+		}
+
+		/// <summary>
+		/// Convers a double value to a currency value
+		/// </summary>
+		/// <param name="d">the double value</param>
+		/// <param name="currency">the currency prefix</param>
+		/// <returns>A string containing the currency value</returns>
+		[Obsolete("Use NumberToCurrency() instead.")]
+		internal static string DoubleToCurrency(double d, string currency = "$", bool prefixBefore = true)
+		{
+			d = Math.Round(d, 2);
+			string prefix = "";
+			string suffix = "";
+			if (prefixBefore)
+				prefix = currency;
+			else
+				suffix = " " + currency;
+
+			bool isMinus = false;
+			if (d < 0) { isMinus = true; }
+			d = Math.Abs(d);
+			string str = d + "";
+			if (str.Contains(","))
+			{
+				str = str.Replace(",", ".");
+			}
+			else if (str.Contains("."))
+			{
+				//INGORE BECAUSE IT HAS ALREADY THE CORRECT FORMAT
+			}
+			else
+			{
+				if (isMinus)
+				{
+					str = "-" + prefix + str + ".00" + suffix;
+				}
+				else
+				{
+					str = prefix + str + ".00" + suffix;
+				}
+				return str;
+			}
+			string before = str.Split('.')[0];
+			string after = str.Split('.')[1];
+			if (after.Length < 2)
+			{
+				after += "0";
+			}
+
+			if (isMinus)
+			{
+				str = "-" + prefix + before + "." + after + suffix;
+			}
+			else
+			{
+				str = prefix + before + "." + after + suffix;
+			}
+			return str;
+		}
+
+		/// <summary>
+		/// Uses the DoubleToCurrency system to create a Value with a prefix/suffix
+		/// </summary>
+		/// <param name="value">the double value</param>
+		/// <param name="prefix">the prefix</param>
+		/// <param name="isbefore">Is it a prefix (true) or a suffix (false)?</param>
+		/// <returns></returns>
+		internal static string PrefixValue(double value, string prefix, bool isbefore = false)
+		{
+			if (isbefore) { return prefix + NumberToCurrency(value, ""); }
+			return NumberToCurrency(value, "") + prefix;
+		}
+
+		/// <summary>
+		/// Uses the DoubleToCurrency system to create a Value with a prefix/suffix
+		/// </summary>
+		/// <param name="value">the double value</param>
+		/// <param name="prefix">the prefix</param>
+		/// <param name="isbefore">Is it a prefix (true) or a suffix (false)?</param>
+		/// <returns></returns>
+		internal static string PrefixValue(decimal value, string prefix, bool isbefore = false)
+		{
+			if (isbefore) { return prefix + NumberToCurrency(value, ""); }
+			return NumberToCurrency(value, "") + prefix;
 		}
 
 		/// <summary>
