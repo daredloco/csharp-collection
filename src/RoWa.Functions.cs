@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace RoWa
 {
@@ -269,6 +270,25 @@ namespace RoWa
 				return;
 			}
 			throw new Exception("Invalid Control type!");
+		}
+
+		/// <summary>
+		/// Shuffles a list from type T
+		/// </summary>
+		/// <typeparam name="T">Type</typeparam>
+		/// <param name="list">The list to shuffle</param>
+		public static void Shuffle<T>(this IList<T> list)
+		{
+			Random rng = new Random();
+			int n = list.Count;
+			while (n > 1)
+			{
+				n--;
+				int k = rng.Next(n + 1);
+				T value = list[k];
+				list[k] = list[n];
+				list[n] = value;
+			}
 		}
 	}
 }

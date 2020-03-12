@@ -11,14 +11,6 @@ namespace RoWa
 	namespace Xamarin { 
 		internal static class Functions
 		{
-			/// <summary>
-			/// Checks if the actual user has Admin Rights
-			/// </summary>
-			/// <returns>True if has Adminrights and false if not</returns>
-			[DllImport("shell32.dll", SetLastError = true)]
-			[return: MarshalAs(UnmanagedType.Bool)]
-			internal static extern bool IsUserAnAdmin();
-
 			internal enum HashType
 			{
 				SHA256,
@@ -165,6 +157,25 @@ namespace RoWa
 					days.Add(d.Date);
 				}
 				return days.ToArray();
+			}
+
+			/// <summary>
+			/// Shuffles a list from type T
+			/// </summary>
+			/// <typeparam name="T">Type</typeparam>
+			/// <param name="list">The list to shuffle</param>
+			public static void Shuffle<T>(this IList<T> list)
+			{
+				Random rng = new Random();
+				int n = list.Count;
+				while (n > 1)
+				{
+					n--;
+					int k = rng.Next(n + 1);
+					T value = list[k];
+					list[k] = list[n];
+					list[n] = value;
+				}
 			}
 
 			/// <summary>
