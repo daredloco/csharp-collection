@@ -187,7 +187,7 @@ RoWa.Settings.Location = "settings.cfg" //Sets the location of the file (default
 RoWa.Settings.Load(); //Loads the settings from the file
 RoWa.Settings.SetValue("language","en"); //Adds/Updates the value to the settings and saves the file
 RoWa.Settings.RemoveValue("language"); //Removes the value from the settings and saves the file
-RoWa.Settings.GetValue("language"); //Returns a dynamic variable with the value
+RoWa.Settings.GetValue<T>("language"); //Returns a variable from type T with the value
 ```
 
 ## RoWa.Game.cs
