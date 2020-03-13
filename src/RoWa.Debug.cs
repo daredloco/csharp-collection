@@ -33,6 +33,21 @@ namespace RoWa
 		}
 
 		/// <summary>
+		/// Sets the directory of the logs
+		/// </summary>
+		/// <param name="dir">The directory of the logs</param>
+		/// <returns>true if directory was changed, false if not</returns>
+		internal static bool SetDirectory(string dir)
+		{
+			if (Directory.Exists(dir))
+			{ 
+				logdir = dir;
+				return true; 
+			}
+			return false;
+		}
+
+		/// <summary>
 		/// Writes an info message to the log
 		/// </summary>
 		/// <param name="msg">The message to be written to the log</param>
