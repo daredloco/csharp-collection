@@ -24,6 +24,17 @@ namespace RoWa
 		}
 
 		/// <summary>
+		/// Checks if the settings exist or not
+		/// </summary>
+		/// <returns>true if the settings exist, false if not</returns>
+		public static bool Exists()
+		{
+			if (File.Exists(Location))
+				return true;
+			return false;
+		}
+
+		/// <summary>
 		/// Sets a value to the settings file, will load the settingsfile if not loaded already
 		/// </summary>
 		/// <typeparam name="T">The type of the value</typeparam>
@@ -42,6 +53,7 @@ namespace RoWa
 		/// <param name="key">The key of the setting</param>
 		public static void RemoveValue(string key)
 		{
+			if (file == null) { Load(); }
 			file.Remove(key);
 			file.Save();
 		}
@@ -54,6 +66,7 @@ namespace RoWa
 		/// <returns>The value of the setting</returns>
 		public static T GetValue<T>(string key)
 		{
+			if (file == null) { Load(); }
 			return (T)Convert.ChangeType(file.Get(key),typeof(T));
 		}
 
@@ -66,13 +79,14 @@ namespace RoWa
 		/// <returns>The value of the setting</returns>
 		public static T GetValue<T>(string key, T defaultvalue)
 		{
+			if (file == null) { Load(); }
 			try
 			{
 				return (T)Convert.ChangeType(file.Get(key), typeof(T));
 			}
 			catch (Exception ex)
 			{
-				if (ex.Message == "Couldn't find key '" + key + "' inside the settings!")
+				if (ex.HResult == -2146233088)
 					return defaultvalue;
 				throw ex;
 			}
@@ -103,7 +117,7 @@ namespace RoWa
 			public string Get(string key)
 			{
 				if (!dict.ContainsKey(key))
-					throw new Exception("Couldn't find key '" + key + "' inside the settings!");
+					throw new KeyNotFoundException("Couldn't find key '" + key + "' inside the settings!");
 
 				return dict[key];
 			}
@@ -126,10 +140,13 @@ namespace RoWa
 
 			public void Load()
 			{
-				if (File.Exists(Location))
-					throw new Exception("Couldn't find the file '" + Location + "'!");
-
 				dict = new Dictionary<string, string>();
+				if (!File.Exists(Location))
+				{
+					File.Create(Location);
+					return; 
+				}
+
 				foreach (string fline in File.ReadAllLines(Location))
 				{
 					if (fline.Contains("="))
@@ -142,6 +159,34 @@ namespace RoWa
 				}
 			}
 		}
+
+		[Serializable]
+		public class KeyNotFoundException : Exception
+		{
+			public KeyNotFoundException(string message) : base(message)
+			{
+				//Use this if you use the RoWa.Debug class
+				//Debug.ExceptionLog(this);
+			}
+
+			public KeyNotFoundException(string message, Exception innerException) : base(message, innerException)
+			{
+				//Use this if you use the RoWa.Debug class
+				//Debug.ExceptionLog(this);
+			}
+
+			public KeyNotFoundException()
+			{
+				//Use this if you use the RoWa.Debug class
+				//Debug.ExceptionLog(this);
+			}
+
+			protected KeyNotFoundException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
+			: base(serializationInfo, streamingContext)
+			{
+			}
+		}
+
 	}
 
 }
