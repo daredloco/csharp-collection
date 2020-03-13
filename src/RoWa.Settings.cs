@@ -26,12 +26,13 @@ namespace RoWa
 		/// <summary>
 		/// Sets a value to the settings file, will load the settingsfile if not loaded already
 		/// </summary>
+		/// <typeparam name="T">The type of the value</typeparam>
 		/// <param name="key">The key of the setting</param>
 		/// <param name="value">The value of the setting</param>
-		public static void SetValue(string key, dynamic value)
+		public static void SetValue<T>(string key, T value)
 		{
-			if (file == null) { Load(); }
-			file.Set(key, value);
+			if(file == null) { Load(); }
+			file.Set(key, value.ToString());
 			file.Save();
 		}
 
@@ -46,13 +47,35 @@ namespace RoWa
 		}
 
 		/// <summary>
-		/// Returns the value of the setting
+		/// Returns the value of a setting with type T
 		/// </summary>
+		/// <typeparam name="T">The type of the setting</typeparam>
 		/// <param name="key">The key of the setting</param>
 		/// <returns>The value of the setting</returns>
-		public static dynamic GetValue(string key)
+		public static T GetValue<T>(string key)
 		{
-			return file.Get(key);
+			return (T)Convert.ChangeType(file.Get(key),typeof(T));
+		}
+
+		/// <summary>
+		/// Returns the value of a setting with type T
+		/// </summary>
+		/// <typeparam name="T">The type of the setting</typeparam>
+		/// <param name="key">The key of the setting</param>
+		/// <param name="defaultvalue">The default value of type T</param>
+		/// <returns>The value of the setting</returns>
+		public static T GetValue<T>(string key, T defaultvalue)
+		{
+			try
+			{
+				return (T)Convert.ChangeType(file.Get(key), typeof(T));
+			}
+			catch (Exception ex)
+			{
+				if (ex.Message == "Couldn't find key '" + key + "' inside the settings!")
+					return defaultvalue;
+				throw ex;
+			}
 		}
 
 		public class SaveFile
