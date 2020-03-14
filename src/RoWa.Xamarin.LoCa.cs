@@ -41,6 +41,9 @@ namespace RoWa
 				if (!Languages.ContainsKey(defaultlanguage))
 					throw new LoCaException("Couldn't find default language '" + defaultlanguage + "'!");
 
+				if (!Languages.ContainsKey(defaultlanguage))
+					throw new LoCaException("Couldn't find default language '" + defaultlanguage + "'!");
+
 				if (Languages.ContainsKey(defaultlanguage))
 				{
 					UserLanguage = Languages[defaultlanguage];
