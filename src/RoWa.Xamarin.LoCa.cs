@@ -174,6 +174,7 @@ namespace RoWa
 			/// Translates the key
 			/// </summary>
 			/// <param name="key">The key to translate</param>
+			[Obsolete("Use Trans instead.")]
 			public static string Translate(string key)
 			{
 				return Trans(key);
