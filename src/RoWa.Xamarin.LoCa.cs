@@ -55,8 +55,8 @@ namespace RoWa
 						throw new LoCaException("There aren't any languages inside the database, please check if you did set the right folder '" + dir + "'!");
 					foreach (KeyValuePair<string, Language> l in Languages)
 					{
-						UserLanguage = l;
-						DefaultLanguage = l;
+						UserLanguage = l.Value;
+						DefaultLanguage = l.Value;
 						break;
 					}
 				}
