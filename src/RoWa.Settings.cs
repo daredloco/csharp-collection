@@ -44,7 +44,6 @@ namespace RoWa
 		{
 			if(file == null) { Load(); }
 			file.Set(key, value.ToString());
-			file.Save();
 		}
 
 		/// <summary>
@@ -55,7 +54,6 @@ namespace RoWa
 		{
 			if (file == null) { Load(); }
 			file.Remove(key);
-			file.Save();
 		}
 
 		/// <summary>
@@ -122,9 +120,12 @@ namespace RoWa
 				return dict[key];
 			}
 
-			public void Remove(string key)
+			public void Remove(string key, bool autosave = true)
 			{
 				dict.Remove(key);
+
+				if (autosave)
+					Save();
 			}
 
 			public void Save()
@@ -138,13 +139,16 @@ namespace RoWa
 				}
 			}
 
-			public void Load()
+			public void Load(bool createFile = false)
 			{
 				dict = new Dictionary<string, string>();
-				if (!File.Exists(Location))
+				if (!File.Exists(Location) && createFile)
 				{
 					File.Create(Location);
 					return; 
+				}else if(!File.Exists(Location) && !createFile)
+				{
+					return;
 				}
 
 				foreach (string fline in File.ReadAllLines(Location))
