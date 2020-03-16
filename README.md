@@ -23,6 +23,9 @@ A collection of scripts for C#
 
 ## Requirements
 C# 4.0+
+### For RoWa.Xamarin.* files
+Xamarin.Android 9.0+
+Xamarin.iOS and Xamarin.Forms not tested!
 
 ## RoWa.LoCa.cs
 
