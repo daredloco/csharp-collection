@@ -190,6 +190,37 @@ RoWa.Settings.RemoveValue("language"); //Removes the value from the settings and
 RoWa.Settings.GetValue<T>("language"); //Returns a variable from type T with the value
 ```
 
+## RoWa.Networking.cs
+Includes WebServer, Server and Client objects.
+
+### WebServer:
+```cs
+RoWa.Networking.WebServer ws = new RoWa.Networking.WebServer("www.rowa-digital.ch"); //Creates a new WebServer for the url
+RoWa.Networking.WebServer wsNoSSL = new RoWa.Networking.WebServer("www.rowa-digital.ch",false); //Creates a new WebServer from the url with SSL disabled
+
+ws.SetSubs("sub","sub2"); //Sets the sub folders for the WebServer (https://www.rowa-digital.ch/sub/sub2/)
+ws.SetSubs(); //Sets the directory of the WebServer back to root
+
+ws.GetString("page.html"); //Returns the content of www.rowa-digital.ch/page.html as a string
+ws.GetData("page.html"); //Returns the content of www.rowa-digital.ch/page.html as a byte array
+ws.DownloadFile("file.txt","destination.txt"); //Downloads the file www.rowa-digital.ch/page.html to destination.txt
+
+KeyValuePair<string,string> content1 = new KeyValuePair<string,string>("key1","value1");
+KeyValuePair<string,string> content2 = new KeyValuePair<string,string>("key2","value2");
+
+ws.GetString("page.html", content1, content2); //Returns the content of www.rowa-digital.ch/page.html as a string with the GET parameters set
+ws.GetData("page.html", content1, content2); //Returns the content of www.rowa-digital.ch/page.html as a byte array with the GET parameters set
+ws.DownloadFile("file.txt","destination.txt", content1, content2); //Downloads the file www.rowa-digital.ch/page.html to destiantion.txt with the GET parameters set
+
+ws.GetPostString("page.html", content1, content2); //Returns the content of www.rowa-digital.ch/page.html as a string with the POST parameters set
+```
+
+### Server:
+Not included in actual version!
+
+### Client:
+Not included in actual version!
+
 ## RoWa.Game.cs
 
 ### Usage:
