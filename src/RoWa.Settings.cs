@@ -92,9 +92,9 @@ namespace RoWa
 
 		public class SaveFile
 		{
-			string Location;
+			readonly string Location;
 
-			Dictionary<string, string> dict { get; set; }
+			Dictionary<string, string> Dict { get; set; }
 			public SaveFile(string fname)
 			{
 				Location = fname;
@@ -103,10 +103,10 @@ namespace RoWa
 
 			public void Set(string key, string value, bool autosave = true)
 			{
-				if (dict.ContainsKey(key))
-					dict[key] = value;
+				if (Dict.ContainsKey(key))
+					Dict[key] = value;
 				else
-					dict.Add(key, value);
+					Dict.Add(key, value);
 
 				if (autosave)
 					Save();
@@ -114,15 +114,15 @@ namespace RoWa
 
 			public string Get(string key)
 			{
-				if (!dict.ContainsKey(key))
+				if (!Dict.ContainsKey(key))
 					throw new KeyNotFoundException("Couldn't find key '" + key + "' inside the settings!");
 
-				return dict[key];
+				return Dict[key];
 			}
 
 			public void Remove(string key, bool autosave = true)
 			{
-				dict.Remove(key);
+				Dict.Remove(key);
 
 				if (autosave)
 					Save();
@@ -132,7 +132,7 @@ namespace RoWa
 			{
 				using (StreamWriter sw = new StreamWriter(Location, false))
 				{
-					foreach (KeyValuePair<string, string> kvp in dict)
+					foreach (KeyValuePair<string, string> kvp in Dict)
 					{
 						sw.WriteLine(kvp.Key + "=" + kvp.Value);
 					}
@@ -141,7 +141,7 @@ namespace RoWa
 
 			public void Load(bool createFile = false)
 			{
-				dict = new Dictionary<string, string>();
+				Dict = new Dictionary<string, string>();
 				if (!File.Exists(Location) && createFile)
 				{
 					File.Create(Location);
@@ -157,8 +157,8 @@ namespace RoWa
 					{
 						string k = fline.Split('=')[0];
 						string v = fline.Replace(k + "=", "");
-						if (!dict.ContainsKey(k))
-							dict.Add(k, v);
+						if (!Dict.ContainsKey(k))
+							Dict.Add(k, v);
 					}
 				}
 			}

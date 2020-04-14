@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.IO;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace RoWa
 {
@@ -320,11 +321,11 @@ namespace RoWa
 		internal static byte[] EncryptStringToBytes_Aes(string plainText, byte[] Key, byte[] IV)
 		{
 			if (plainText == null || plainText.Length <= 0)
-				throw new ArgumentNullException("plainText");
+				throw new ArgumentNullException(nameof(plainText));
 			if (Key == null || Key.Length <= 0)
-				throw new ArgumentNullException("Key");
+				throw new ArgumentNullException(nameof(Key));
 			if (IV == null || IV.Length <= 0)
-				throw new ArgumentNullException("IV");
+				throw new ArgumentNullException(nameof(IV));
 			byte[] encrypted;
 
 			using (Aes aesAlg = Aes.Create())
@@ -360,11 +361,11 @@ namespace RoWa
 		internal static string DecryptStringFromBytes_Aes(byte[] cipherText, byte[] Key, byte[] IV)
 		{
 			if (cipherText == null || cipherText.Length <= 0)
-				throw new ArgumentNullException("cipherText");
+				throw new ArgumentNullException(nameof(cipherText));
 			if (Key == null || Key.Length <= 0)
-				throw new ArgumentNullException("Key");
+				throw new ArgumentNullException(nameof(Key));
 			if (IV == null || IV.Length <= 0)
-				throw new ArgumentNullException("IV");
+				throw new ArgumentNullException(nameof(IV));
 
 			string plaintext = null;
 
@@ -402,7 +403,7 @@ namespace RoWa
 			{
 				ComboBox c = (ComboBox)control;
 				int maxwidth = 0;
-				int tmp = 0;
+				int tmp;
 
 				foreach(var obj in c.Items)
 				{
