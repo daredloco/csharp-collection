@@ -443,5 +443,38 @@ namespace RoWa
 				list[n] = value;
 			}
 		}
+
+		/// <summary>
+		/// Removes 'amount' bytes from an array 'bytes' from the front 'fromFront' or back
+		/// </summary>
+		/// <param name="bytes">The source bytes</param>
+		/// <param name="amount">The amount of bytes to be removed</param>
+		/// <param name="fromFront">If true will remove from the front, if false from the back</param>
+		/// <returns></returns>
+		public static byte[] SliceBytes(byte[] bytes, int amount, bool fromFront = true)
+		{
+			if (amount <= 0)
+				throw new Exception("Invalid amount '" + amount + "', needs to be bigger than 0!");
+
+			if (amount >= bytes.Length)
+				throw new Exception("Invalid amount '" + amount + "', needs to be smaller than '" + amount + "'");
+
+			if (fromFront)
+			{
+				var sourceStartIndex = amount;
+				var destinationStartIndex = 0;
+				var destination = new byte[bytes.Length - amount];
+				Array.Copy(bytes, sourceStartIndex, destination, destinationStartIndex, destination.Length);
+				return destination;
+			}
+			else
+			{
+				var sourceStartIndex = 0;
+				var destinationStartIndex = 0;
+				var destination = new byte[bytes.Length - amount];
+				Array.Copy(bytes, sourceStartIndex, destination, destinationStartIndex, destination.Length);
+				return destination;
+			}			
+		}
 	}
 }
