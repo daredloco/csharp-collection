@@ -391,7 +391,7 @@ namespace RoWa
 			/// <summary>
 			/// Coordinates Object
 			/// </summary>
-			public class Coordinates
+			public class Coordinates : IComparable<Coordinates>
 			{
 				public decimal Latitude { get; set; }
 				public decimal Longitude { get; set; }
@@ -406,6 +406,11 @@ namespace RoWa
 				{
 					Latitude = latitude;
 					Longitude = longitude;
+				}
+
+				public decimal CompareTo(Coordinates that)
+				{
+					return GetDistance(new Coordinates(Latitude, Longitude), new Coordinates(that.Latitude, that.Longitude));
 				}
 			}
 
