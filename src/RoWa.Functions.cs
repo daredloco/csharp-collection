@@ -476,5 +476,71 @@ namespace RoWa
 				return destination;
 			}			
 		}
+
+		/// <summary>
+		/// Converts a value in degrees to radiants
+		/// </summary>
+		/// <param name="degrees">Degrees</param>
+		/// <returns>Radiants</returns>
+		public static double DegreesToRadians(double degrees)
+		{
+			return degrees * Math.PI / 180;
+		}
+
+		/// <summary>
+		/// Get the distance of two coordinates
+		/// </summary>
+		/// <param name="c1">First coordinate</param>
+		/// <param name="c2">Second coordinate</param>
+		/// <returns>The distance in KM</returns>
+		public static decimal GetDistance(Coordinates c1, Coordinates c2)
+		{
+			var earthRadiusKm = 6371;
+
+			var dLat = DegreesToRadians(lat2 - lat1);
+			var dLon = DegreesToRadians(lon2 - lon1);
+
+			lat1 = DegreesToRadians(lat1);
+			lat2 = DegreesToRadians(lat2);
+
+			var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+					Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+			return earthRadiusKm * c;
+		}
+
+		/// <summary>
+		/// Get the distance of two coordinates
+		/// </summary>
+		/// <param name="lat1">Latitude of the first coordinate</param>
+		/// <param name="long1">Longitude of the first coordinate</param>
+		/// <param name="lat2">Latitude of the second coordinate</param>
+		/// <param name="long2">Longitude of the second coordinate</param>
+		/// <returns>The distance in KM</returns>
+		public static decimal GetDistance(decimal lat1, decimal long1, decimal lat2, decimal long2)
+		{
+			return GetDistance(new Coordinates(lat1, long1), new Coordinates(lat2, long2));
+		}
+
+		/// <summary>
+		/// Coordinates Object
+		/// </summary>
+		public class Coordinates
+		{
+			public decimal Latitude { get; set; }
+			public decimal Longitude { get; set; }
+
+			public Coordinates()
+			{
+				Latitude = 0;
+				Longitude = 0;
+			}
+
+			public Coordinates(decimal latitude, decimal longitude)
+			{
+				Latitude = latitude;
+				Longitude = longitude;
+			}
+		}
 	}
 }
