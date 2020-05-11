@@ -367,10 +367,11 @@ namespace RoWa
 
 				lat1 = DegreesToRadians(lat1);
 				lat2 = DegreesToRadians(lat2);
-
-				var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-						Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+				
+				var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+						Math.Sin(dLon / 2) * Math.Sin(dLon / 2) * Math.Cos(lat1) * Math.Cos(lat2);
+				
+				var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
 				return earthRadiusKm * c;
 			}
 
