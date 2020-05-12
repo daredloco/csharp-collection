@@ -358,10 +358,8 @@ namespace RoWa
 			/// <param name="c1">First coordinate</param>
 			/// <param name="c2">Second coordinate</param>
 			/// <returns>The distance in KM</returns>
-			public static decimal GetDistance(Coordinates c1, Coordinates c2)
+			public static decimal GetDistance(Coordinates c1, Coordinates c2, decimal earthRadiusKm = 6371)
 			{
-				var earthRadiusKm = 6371;
-
 				var dLat = DegreesToRadians(lat2 - lat1);
 				var dLon = DegreesToRadians(lon2 - lon1);
 
@@ -383,9 +381,9 @@ namespace RoWa
 			/// <param name="lat2">Latitude of the second coordinate</param>
 			/// <param name="long2">Longitude of the second coordinate</param>
 			/// <returns>The distance in KM</returns>
-			public static decimal GetDistance(decimal lat1, decimal long1, decimal lat2, decimal long2)
+			public static decimal GetDistance(decimal lat1, decimal long1, decimal lat2, decimal long2, decimal earthRadiusKm = 6371)
 			{
-				return GetDistance(new Coordinates(lat1, long1), new Coordinates(lat2, long2));
+				return GetDistance(new Coordinates(lat1, long1), new Coordinates(lat2, long2), earthRadiusKm);
 			}
 
 			/// <summary>
