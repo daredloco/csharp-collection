@@ -154,6 +154,43 @@ DoubleToCurrency(value,prefix);
 ResizeControl(CONTROL);
 ```
 
+#### Shuffle Lists
+```cs
+//Shuffles a list of strings
+List<string> lst = new List<string>();
+lst.Add("a");
+lst.Add("b");
+Shuffle(lst);
+```
+
+#### Slice Byte arrays
+```cs
+byte[] arr = new byte[]{ 0,1,2,3,4,5 };
+SliceBytes(arr, 1, false); //arr = 0,1,2,3,4
+SliceBytes(arr, 2, true); //arr = 2,3,4,5
+```
+
+#### Convert degrees to radiants
+```cs
+double degrees = 45;
+DegreesToRadians(degrees);
+```
+
+#### Get Distance of 2 coordinates
+```cs
+//Get distance from 2 Coordinates objects
+Coordinates c1 = new Coordinates(1,1);
+Coordinates c2 = new Coordinates(2,2);
+GetDistance(c1, c2);
+
+//Get distance from decimal values
+decimal lat1 = 10;
+decimal long1 = 10;
+decimal lat2 = 11.5;
+decimal long2 = 12.5;
+GetDistance(lat1, long1, lat2, long2);
+```
+
 ## RoWa.Xamarin.Functions.cs
 Same as RoWa.Functions.cs but without some Desktop only functions
 
