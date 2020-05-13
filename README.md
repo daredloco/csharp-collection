@@ -17,6 +17,8 @@ A collection of scripts for C#
 
 * [RoWa.Networking.cs](#rowanetworkingcs) (Networking functions)
 
+* [RoWa.Serializer.cs](#rowaserializercs) (Object serializer)
+
 * [RoWa.Game.cs](#rowagamecs) (Useful game functions)
 
 * [RoWa.Game.GameTime.cs](#rowagamegametimecs) (Gametime system)
