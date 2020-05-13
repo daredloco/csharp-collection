@@ -263,6 +263,34 @@ Not included in actual version!
 ### Client:
 Not included in actual version!
 
+## RoWa.Serializer.cs
+
+### Requirements
+- For XML Serialization you'll need to include the System.Xml Assembly
+- For JSON Serialization you'll need to include the Newtonsoft.JSON Nuget ( https://www.nuget.org/packages/Newtonsoft.Json/ )
+
+### Usage:
+```cs
+
+[Serializable]
+public class TestObject
+{
+  public long Id = 1;
+  public string Name = "test";
+  public int Number = 5;
+}
+TestObject to = new TestObject();
+
+RoWa.Serializer.Binary.WriteToFile("test.dat",to,false); //Writes the object to a binary file (Object needs to be 'Serializable'!)
+RoWa.Serializer.Xml.WriteToFile("test.xml",to,false); //Writes the object to a XML file (Needs to include System.Xml Assembly and function needs to be uncommented)
+RoWa.Serializer.Json.WriteToFile("test.json",to,false); //Writes the object to a JSON file (Needs to include Newtonsoft.Json NuGet and function needs to be uncommented)
+
+RoWa.Serializer.Binary.ReadFromFile<TestObject>("test.dat"); //Returns the object from a binary file
+RoWa.Serializer.Xml.ReadFromFile<TestObject>("test.xml"); //Returns the object from a XML file
+RoWa.Serializer.Json.ReadFromFile<TestObject>("test.json"); //Returns the object from a JSON file
+```
+
+
 ## RoWa.Game.cs
 
 ### Usage:
