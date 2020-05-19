@@ -358,19 +358,19 @@ namespace RoWa
 			/// <param name="c1">First coordinate</param>
 			/// <param name="c2">Second coordinate</param>
 			/// <returns>The distance in KM</returns>
-			public static decimal GetDistance(Coordinates c1, Coordinates c2, decimal earthRadiusKm = 6371)
+			public static double GetDistance(Coordinates c1, Coordinates c2, double earthRadiusKm = 6371)
 			{
-				var dLat = DegreesToRadians(lat2 - lat1);
-				var dLon = DegreesToRadians(lon2 - lon1);
+				var dLat = DegreesToRadians(c2.Latitude - c1.Latitude);
+				var dLon = DegreesToRadians(c2.Longitude - c1.Longitude);
 
-				lat1 = DegreesToRadians(lat1);
-				lat2 = DegreesToRadians(lat2);
-				
+				c1.Latitude = DegreesToRadians(c1.Latitude);
+				c2.Latitude = DegreesToRadians(c2.Latitude);
+
 				var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
-						Math.Sin(dLon / 2) * Math.Sin(dLon / 2) * Math.Cos(lat1) * Math.Cos(lat2);
-				
+						Math.Sin(dLon / 2) * Math.Sin(dLon / 2) * Math.Cos(c1.Latitude) * Math.Cos(c2.Latitude);
+
 				var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-				return earthRadiusKm * c;
+				return Math.Abs(earthRadiusKm * c);
 			}
 
 			/// <summary>
@@ -381,7 +381,7 @@ namespace RoWa
 			/// <param name="lat2">Latitude of the second coordinate</param>
 			/// <param name="long2">Longitude of the second coordinate</param>
 			/// <returns>The distance in KM</returns>
-			public static decimal GetDistance(decimal lat1, decimal long1, decimal lat2, decimal long2, decimal earthRadiusKm = 6371)
+			public static double GetDistance(double lat1, double long1, double lat2, double long2, double earthRadiusKm = 6371)
 			{
 				return GetDistance(new Coordinates(lat1, long1), new Coordinates(lat2, long2), earthRadiusKm);
 			}
@@ -389,10 +389,10 @@ namespace RoWa
 			/// <summary>
 			/// Coordinates Object
 			/// </summary>
-			public class Coordinates : IComparable<Coordinates>
+			public class Coordinates
 			{
-				public decimal Latitude { get; set; }
-				public decimal Longitude { get; set; }
+				public double Latitude { get; set; }
+				public double Longitude { get; set; }
 
 				public Coordinates()
 				{
@@ -400,15 +400,15 @@ namespace RoWa
 					Longitude = 0;
 				}
 
-				public Coordinates(decimal latitude, decimal longitude)
+				public Coordinates(double latitude, double longitude)
 				{
 					Latitude = latitude;
 					Longitude = longitude;
 				}
 
-				public decimal CompareTo(Coordinates that)
+				public double DistanceTo(Coordinates other)
 				{
-					return GetDistance(new Coordinates(Latitude, Longitude), new Coordinates(that.Latitude, that.Longitude));
+					return GetDistance(new Coordinates(Latitude, Longitude), new Coordinates(other.Latitude, other.Longitude));
 				}
 			}
 

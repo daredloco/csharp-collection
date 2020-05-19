@@ -505,7 +505,7 @@ namespace RoWa
 					Math.Sin(dLon / 2) * Math.Sin(dLon / 2) * Math.Cos(c1.Latitude) * Math.Cos(c2.Latitude);
 
 			var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-			return earthRadiusKm * c;
+			return Math.Abs(earthRadiusKm * c);
 		}
 
 		/// <summary>
@@ -541,7 +541,7 @@ namespace RoWa
 				Longitude = longitude;
 			}
 
-			public double CompareTo(Coordinates other)
+			public double DistanceTo(Coordinates other)
 			{
 				return GetDistance(new Coordinates(Latitude, Longitude), new Coordinates(other.Latitude, other.Longitude));
 			}
