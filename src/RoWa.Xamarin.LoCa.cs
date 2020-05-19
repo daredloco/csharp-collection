@@ -52,7 +52,7 @@ namespace RoWa
 				else
 				{
 					if (Languages.Count < 1)
-						throw new LoCaException("There aren't any languages inside the database, please check if you did set the right folder '" + dir + "'!");
+						throw new LoCaException("There aren't any languages inside the database, please check if you did set the right asset '" + asset + "'!");
 					foreach (KeyValuePair<string, Language> l in Languages)
 					{
 						UserLanguage = l.Value;
