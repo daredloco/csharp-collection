@@ -25,11 +25,13 @@ A collection of scripts for C#
 
 * [RoWa.Game.SaveHandler.cs](#rowagamesavehandlercs) (Savegame system)
 
+* [RoWa.Xamarin.WebControls.cs](#rowaxamarinwebcontrols) (Xamarin WebControls)
+
 ## Requirements
 C# 4.0+
 ### For RoWa.Xamarin.* files
 Xamarin.Android 9.0+
-Xamarin.iOS and Xamarin.Forms not tested!
+Xamarin.iOS and Xamarin.Forms not tested! (RoWa.Xamarin.WebControls only works with Android!)
 
 ## RoWa.LoCa.cs
 
@@ -353,4 +355,15 @@ RoWa.Game.Vector2 v = new RoWa.Game.Vector2(5,5);
 sf2.Add("player_position",v); //Adds a special object to the Savefile data. (Vector2 and Vector3 are supported)
 
 sf2.Save(); //Saves the data to the savefile
+```
+
+## RoWa.Xamarin.WebControls.cs
+
+### Usage:
+
+1) Download bootstrap.min.css and copy it into your Assets/bootstrap folder.
+2) Create a custom.css file inside your Assets/bootstrap folder.
+3) TODO
+```cs
+//TODO
 ```
